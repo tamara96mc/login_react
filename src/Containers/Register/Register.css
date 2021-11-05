@@ -1,0 +1,16 @@
+.designRegister{
+    width: 35em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.botonRegister{
+
+    height: 2em;
+    width: 6em;
+    background-color: brown;
+    transition: 0.4;
+}
