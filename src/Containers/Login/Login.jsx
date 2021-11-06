@@ -1,59 +1,67 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import useForm from "../../functions/hooks/useFormLogin.js";
+import {validateLogin} from "../../functions/hooks/validateInput";
 import './Login.css';
-
 
 const Login = () => {
 
     const history = useNavigate();
-
-    //Hooks
-    const [msgError, setmsgError] = useState("");
-    const [credentials, setCredentials] = useState({ email: '', password: '' });
-
-    //Handler o manejador
-    const manejadorInputs = (e) => {
-        setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    }
-
-    const logeame = async () => {
-
-        let body = {
-            email: credentials.email,
-            password: credentials.password
-        };
+    const submit = async () => {
 
         try {
-
-            let res = await axios.post("https://api-tmc-pelis.herokuapp.com/api/signin", body);
-            setmsgError(`Hola de nuevo ${res.data.user}....`);
-            console.log("res" , res.data.user);
-            localStorage.setItem("datosLogin", JSON.stringify(res.data.user.email));
+            let res = await axios.post("https://api-tmc-pelis.herokuapp.com/api/signin", values);
+            console.log("res", res.data.user);
+            localStorage.setItem("datosLogin", JSON.stringify(res.data.user));
 
             setTimeout(() => {
                 history("/profile");
             }, 4000);
         } catch (error) {
-            setmsgError("Error al logearme");
-
+            console.log(error);
         }
-
     }
+
+    const { handleChange, handleSubmit, values, errors } = useForm(submit, validateLogin);    
+
 
 
     return (
 
         <div className="designLogin">
-            {/*<pre>{JSON.stringify(credentials, null,2)}</pre>*/}
-            <input type='email' name='email' title='correo' onChange={manejadorInputs} lenght='30' />
-            <input type='password' name='password' title='clave' onChange={manejadorInputs} lenght='30' />
-            <div className="sendButton" onClick={() => logeame()}>Login</div>
-            <div className="error">{msgError}</div>
+
+            <h3 className="tituloLogin">Iniciar sesión</h3>
+
+            <div className="formLogin">
+                <label>Correo electrónico</label>
+                <input
+                    className={`${errors.email && "inputError"}`}
+                    name="email"
+                    type="email"
+                    value={values.email}
+                    onChange={handleChange}
+                />
+                {errors.email && <p className="error">{errors.email}</p>}
+            </div>
+
+            <div className="form-group">
+                <label>Contraseña</label>
+                <input
+                    className={`${errors.password && "inputError"}`}
+                    name="password"
+                    type="password"
+                    value={values.password}
+                    onChange={handleChange}
+                />
+                {errors.password && <p className="error">{errors.password}</p>}
+            </div>
+            <div className="sendButton" onClick={handleSubmit}>Login</div>
+
         </div>
-    )
-};
+    );
+
+}
 
 export default Login;

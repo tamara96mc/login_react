@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import useForm from "../../functions/hooks/useFormRegister";
+import { validateSignUp } from "../../functions/hooks/validateInput";
+
 import './Register.css';
 
 
@@ -10,68 +13,68 @@ const Register = () => {
 
     const history = useNavigate();
 
-    //Hooks
-    const [msgError, setmsgError] = useState("");
-    const [user, setUser] = useState(
-        {
-            name: '',
-            surname: '',
-            dni: '',
-            email: '',
-            address: '',
-            city: '',
-            cp: 0,
-            password: '',
-            password2: '',
-            phone: ''
-        });
+    const submit = async () => {
 
+        try {
+            let res = await axios.post("https://api-tmc-pelis.herokuapp.com/api/signup", values);
+            console.log("res", res);
+            localStorage.setItem("datosLogin", JSON.stringify(res.data.user));
+            history("/profile");
 
-    useEffect(() => {
-
-    }, []);
-
-    useEffect(() => {
-
-    });
-
-    const enviarDatosRegistro = async () => {
-
-        // let body = {
-        //     email: credentials.email,
-        //     password: credentials.password
-        // };
-
-        // try {
-
-        //     let res = await axios.post("https://api-tmc-pelis.herokuapp.com/api/signup", body);
-
-        // } catch (error) {
-        //     setmsgError("Error al logearme");
-        //     console.log(error);
-
-        // }
+        } catch (error) {
+            console.log(error)
+        }
     };
 
-    const userHander = (e) => {
+    const { handleChange, handleSubmit, values, errors } = useForm(submit, validateSignUp);
 
-        setUser({ ...user, [e.target.name]: e.target.value });
-    }
 
     return (
-
         <div className="designRegister">
-            <input type='text' name='name' title='name' onChange={userHander} placeholder="Nombre" lenght='30' />
-            <input type='text' name='surname' title='name' onChange={userHander} placeholder="Apellido" lenght='30' />
-            <input type='text' name='dni' title='dni' onChange={userHander} placeholder="dni" lenght='30' />
-            <input type='text' name='email' title='email' onChange={userHander} placeholder="email" lenght='30' />
-            <input type='password' name='address' title='address' onChange={userHander} placeholder="calle" lenght='30' />
-            <input type='text' name='city' title='city' onChange={userHander} placeholder="ciudad" lenght='30' />
-            <input type='text' name='cp' title='cp' onChange={userHander} placeholder="12345" lenght='30' />
-            <input type='password' name='password' title='password' onChange={userHander} placeholder="password" lenght='30' />
-            <input type='password' name='password2' title='password2' onChange={userHander} placeholder="password" lenght='30' />
-            <input type='text' name='phone' title='phone' onChange={userHander} placeholder="phone" lenght='30' />   
-            <div className="botonRegister" onClick={() => enviarDatosRegistro()}>Register</div>        
+
+            <div className="campo">
+            <h3 className="tituloLogin">Registro</h3>
+            <label>Nombre</label>
+                <input 
+                    name="name"
+                    placeholder="Nombre y apellidos"
+                    value={values.name || ''}
+                    onChange={handleChange}
+                />
+                {errors.name && <p className="error">{errors.name}</p>}
+            </div>
+            <div className="campo">
+            <label>Correo</label>
+                <input 
+                    name="email"
+                    placeholder="correo"
+                    value={values.email || ''}
+                    onChange={handleChange}
+                />
+                {errors.email && <p className="error">{errors.email}</p>}
+            </div>
+            <div className="campo">
+            <label>Contraseña</label>
+                <input 
+                    name="password"
+                    placeholder="contraseña"
+                    value={values.password || ''}
+                    onChange={handleChange}
+                />
+                {errors.password && <p className="error">{errors.password}</p>}
+            </div>
+            <div className="campo">
+            <label>Rol</label>
+                <input 
+                    name="rol"
+                    placeholder="admin/user"
+                    value={values.rol || ''}
+                    onChange={handleChange}
+                />
+                {errors.rol && <p className="error">{errors.rol}</p>}
+            </div>
+            <div className="sendButton" onClick={handleSubmit}>Registro</div>
+
         </div>
     )
 };

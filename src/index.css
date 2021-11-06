@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.error {
+  color:  rgba(79,148,212,1);
+  font-size: 13px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.inputError {
+  color:  rgb(202, 96, 26);
+}

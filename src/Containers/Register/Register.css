@@ -1,16 +1,20 @@
 .designRegister{
-    width: 35em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
-.botonRegister{
-
+.sendButton{
     height: 2em;
     width: 6em;
-    background-color: brown;
-    transition: 0.4;
+    background-color: rgb(0, 92, 128);
+    color: white;
+    border-radius: 0.2em;
+    margin-top: 3em;
+}
+
+input{
+    margin-top: 3em;
+    margin-left: 1em;
 }

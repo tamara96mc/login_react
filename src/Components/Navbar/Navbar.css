@@ -1,0 +1,12 @@
+.designHeader {
+    display: flex;
+    justify-content: space-between;
+    background-color: #121212;
+    height: 5em;
+}
+#menu{
+    display: flex;
+}
+#logo{
+height: 2.5em;
+}
