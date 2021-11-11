@@ -1,0 +1,19 @@
+.nav-button {
+
+    height: 2.5em;
+    width: 7em;
+    font-size: medium;
+    border: 0.1em solid $colRoj2;
+    transition: 0.4s;
+    background-color: $colNegro1;
+    color: $colRoj2;
+    cursor: pointer;
+    
+}
+
+
+.nav-button:hover{
+    transition: 0.4s;
+    background-color:$colRoj1;
+    cursor: pointer;
+}

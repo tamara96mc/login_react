@@ -1,0 +1,21 @@
+@import 'scss/variables.scss';
+
+@import 'Containers/Home/Home.scss';
+@import 'Containers/Login/Login.scss';
+@import 'Containers/Pelis/Pelis.scss';
+@import 'Containers/Profile/Profile.scss';
+@import 'Containers/Register/Register.scss';
+
+@import 'Components/Boton/Boton.scss';
+@import 'Components/Navbar/Navbar.scss';
+@import 'Components/Buscador/Buscador.scss';
+@import 'Components/PedidosUser/PedidosUser.scss';
+
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background-color: $colNegro1;
+}

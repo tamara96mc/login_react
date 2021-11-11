@@ -3,22 +3,24 @@ import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useForm from "../../functions/hooks/useFormLogin.js";
-import {validateLogin} from "../../functions/hooks/validateInput";
-import './Login.css';
+import { validateLogin } from "../../functions/hooks/validateInput";
+import { LOGIN } from '../../redux/types';
+import clienteAxios from '../../config/axios';
+import tokenAuth from '../../config/token';
+import { connect } from 'react-redux';
 
-const Login = () => {
+const Login = (props) => {
 
     const history = useNavigate();
     const submit = async () => {
 
         try {
-            let res = await axios.post("https://api-tmc-pelis.herokuapp.com/api/signin", values);
-            console.log("res", res.data.user);
-            localStorage.setItem("datosLogin", JSON.stringify(res.data.user));
-
-            setTimeout(() => {
-                history("/profile");
-            }, 4000);
+            let res = await clienteAxios.post("/api/signin", values);
+            console.log('datos' ,res.data);
+            localStorage.setItem("token", JSON.stringify(res.data.token));
+            props.dispatch({type:LOGIN, payload:res.data});
+            history("/profile");
+     
         } catch (error) {
             console.log(error);
         }
@@ -30,16 +32,16 @@ const Login = () => {
 
     return (
 
-        <div className="designLogin">
+        <div className="form">
 
-            <h3 className="tituloLogin">Iniciar sesión</h3>
+            <h3>Iniciar sesión</h3>
 
-            <div className="formLogin">
-                <label>Correo electrónico</label>
+            <div className="form-group">
                 <input
                     className={`${errors.email && "inputError"}`}
                     name="email"
                     type="email"
+                    placeholder="email"
                     value={values.email}
                     onChange={handleChange}
                 />
@@ -47,21 +49,21 @@ const Login = () => {
             </div>
 
             <div className="form-group">
-                <label>Contraseña</label>
                 <input
                     className={`${errors.password && "inputError"}`}
                     name="password"
                     type="password"
+                    placeholder="password"
                     value={values.password}
                     onChange={handleChange}
                 />
                 {errors.password && <p className="error">{errors.password}</p>}
             </div>
-            <div className="sendButton" onClick={handleSubmit}>Login</div>
+            <div className="send-button" onClick={handleSubmit}>Login</div>
 
         </div>
     );
 
 }
 
-export default Login;
+export default connect()(Login);

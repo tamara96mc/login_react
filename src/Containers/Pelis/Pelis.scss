@@ -1,0 +1,28 @@
+.form-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $colNegro4;
+    margin: 1em;
+}
+.cartel{
+    margin-top: 1em;
+    color: $colBlanco1;
+}
+               
+.card-body{
+ 
+    color: $colBlanco1;
+    margin: 1em;
+}
+.card-title{
+
+    color: $colBlanco1;
+    font-size: x-large;
+    margin-bottom: 1em;
+
+}
+.card-text{
+    margin-bottom: 1em;
+}

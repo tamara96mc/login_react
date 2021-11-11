@@ -1,0 +1,68 @@
+.form-buscador {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: $colBlanco1;
+    padding: 1em;
+
+        label{
+            font-size: larger;
+            color: $colBlanco1;
+            margin-right: 2em;
+            margin-bottom: 0.25em;
+     
+        }
+        
+        select{
+        margin-bottom: 0.1em;   
+        font-size: larger;
+        height: 1.5em;
+        width:6em;
+        transition: 0.4s;
+        background-color: $colNegro3;
+        color: $colBlanco1;
+        border: 0.1em solid $colBlanco1;
+        }
+    
+        option{
+         
+        font-size: larger;
+        height: 1.5em;
+        width:6em;
+        transition: 0.4s;
+        background-color: $colNegro3;
+        color: $colBlanco1;
+        }
+        input{
+        font-size: larger;
+        height: 1.2em;
+        width:12em;
+        transition: 0.4s;
+        background-color: $colNegro3;
+        color: $colBlanco1;
+        border: 0.1em solid $colBlanco1;
+    
+        }
+        button{
+        font-size: larger;
+        height: 1.5em;
+        width:5em;
+        transition: 0.4s;
+        background-color: $colNegro3;
+        color: $colBlanco1;
+        cursor: pointer;
+        border: 0.1em solid $colBlanco1;
+        }
+
+        button:hover{
+            transition: 0.4s;
+            background-color: $colNegro3;
+            cursor: pointer;
+        }
+    
+
+    
+}
+
+

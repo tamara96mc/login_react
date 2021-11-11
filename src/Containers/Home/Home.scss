@@ -1,0 +1,37 @@
+.display-pelis {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.peli {
+    border-radius : 0.2em;
+    border: 0.1em solid $colNegro1;
+    background-color: $colNegro4;
+    width: 15em;
+    height: 21em;
+    margin: 0.1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+.cartel {
+    height: 15em;
+}
+
+.img-load{
+    width: 100vw;
+    height: 100vh;
+}
+
+.peli:hover{
+    transition: 0.4s;
+    background-color: $colNegro5;
+    cursor: pointer;
+    color: $colBlanco1;
+}
