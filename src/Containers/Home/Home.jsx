@@ -3,8 +3,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
-import load from '../../img/load.gif'
-
+import load from '../../img/load.gif';
 const Home = () => {
 
     let navigate = useNavigate();

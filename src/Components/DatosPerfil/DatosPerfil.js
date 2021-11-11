@@ -1,31 +1,47 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import useForm from "../../functions/hooks/useFormRegister";
-import { validateSignUp } from "../../functions/hooks/validateInput";
+import { connect } from 'react-redux';
+import { LOGOUT, UPDATE_USER } from '../../redux/types';
+import {useNavigate} from 'react-router-dom';
 
 
-const DatosPerfil = () => {
+const DatosPerfil = (props) => {
+
+    const [userData, setUserData] = useState(props.credentials.usuario);
+
+    let navigate = useNavigate();
 
     useEffect(() => {
-        setValues(JSON.parse(localStorage.getItem("datosLogin")));
-    }, [])
+        
+        setUserData(props.credentials.user);
 
-    const submit = async () => {
+    }, [props.credentials]);
+
+  
+    const handleSubmit = async () => {
 
         try {
-            let res = await axios.delete(`https://api-tmc-pelis.herokuapp.com/api/${values._id}`, values);
-            localStorage.removeItem("datosLogin");
-            setValues(null);
+            //let res = await axios.update(`https://api-tmc-pelis.herokuapp.com/api/${userData._id}`, userData);
+            props.dispatch({type: UPDATE_USER, payload:userData});
 
         } catch (error) {
             console.log(error)
         }
     };
 
-    const { handleChange, handleSubmit, values, setValues, errors } = useForm(submit, validateSignUp);
+    const logOut = () => {
+    
+        props.dispatch({ type: LOGOUT });
+        navigate("/login");
+    }
 
+    const handleChange = (e) => {
+        //Función encargada de bindear el hook con los inputs.
+        setUserData({ ...userData, [e.target.name]: e.target.value });
+    }
 
+    
     return (
         <div className="form">
             <h3>Perfil</h3>
@@ -34,35 +50,38 @@ const DatosPerfil = () => {
                     name="name"
                     type="text"
                     placeholder="Nombre y apellidos"
-                    value={values.name || ''}
+                    value={userData?.name || ''}
                     onChange={handleChange}
                 />
-                {errors.name && <p className="error">{errors.name}</p>}
             </div>
             <div className="form-group">
                 <input
                     name="email"
                     type="email"
                     placeholder="correo"
-                    value={values.email || ''}
+                    value={userData?.email || ''}
                     onChange={handleChange}
                 />
-                {errors.email && <p className="error">{errors.email}</p>}
             </div>
             <div className="form-group">
                 <input
                     name="password"
                     type="password"
                     placeholder="contraseña"
-                    value={values.password || ''}
+                    value={userData?.password || ''}
                     onChange={handleChange}
                 />
-                {errors.password && <p className="error">{errors.password}</p>}
             </div>
+            <div className="basics_row">
             <div className="send-button" onClick={handleSubmit}>Actualizar</div>
+            <div className="out-button" onClick={logOut}>Cerrar sesión</div>
+            </div>
+           
 
         </div>
     )
 };
 
-export default DatosPerfil;
+export default connect((state) => ({
+    credentials: state.credentials
+}))(DatosPerfil);

@@ -117,14 +117,37 @@ h3{
     cursor: pointer;
     font-size: large;
     background-color: $colNegro1;
-    color: $colRoj2;
+    color: $colRoj1;
+    font-size:large;
+    border: 0.20em solid $colRoj1;
+}
+.send-button:hover {
+    transition: 0.4s;
+    background-color: $colNegro3;
+    cursor: pointer;
+}
+
+.out-button{
+    height: 2.3em;
+    display: flex;
+    width: 10em;
+    margin: 1em;
+    border-radius: 0.2em;
+    transition: 0.4s;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: large;
+    background-color: $colRoj1;
+    color: $colNegro1;
     font-size:large;
     border: 0.20em solid $colRoj1;
 }
 
 
-.send-button:hover{
+.out-button:hover {
     transition: 0.4s;
-    background-color: $colNegro3;
+    background-color: $colRoj2;
     cursor: pointer;
 }

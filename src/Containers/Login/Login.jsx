@@ -19,7 +19,7 @@ const Login = (props) => {
             console.log('datos' ,res.data);
             localStorage.setItem("token", JSON.stringify(res.data.token));
             props.dispatch({type:LOGIN, payload:res.data});
-            history("/profile");
+            history("/");
      
         } catch (error) {
             console.log(error);
