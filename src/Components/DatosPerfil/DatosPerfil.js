@@ -22,7 +22,7 @@ const DatosPerfil = (props) => {
     const handleSubmit = async () => {
 
         try {
-            //let res = await axios.update(`https://api-tmc-pelis.herokuapp.com/api/${userData._id}`, userData);
+            let res = await axios.update(`https://api-tmc-pelis.herokuapp.com/api/${userData._id}`, userData);
             props.dispatch({type: UPDATE_USER, payload:userData});
 
         } catch (error) {

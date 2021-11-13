@@ -5,6 +5,7 @@
 @import 'Containers/Pelis/Pelis.scss';
 @import 'Containers/Profile/Profile.scss';
 @import 'Containers/Register/Register.scss';
+@import 'Containers/Admin/Admin.scss';
 
 @import 'Components/Boton/Boton.scss';
 @import 'Components/Navbar/Navbar.scss';
@@ -18,4 +19,11 @@ body,
   height: 100%;
   margin: 0;
   background-color: $colNegro1;
+}
+#root{
+  background-color: #171817;
+  opacity: 1;
+  background-image:  radial-gradient(#5d0700 2px, transparent 2px), radial-gradient(#5d0700 2px, #171817 2px);
+  background-size: 80px 80px;
+  background-position: 0 0,40px 40px;
 }

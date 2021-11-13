@@ -2,28 +2,28 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import tokenAuth from '../../config/token';
-
+import foto from '../../img/peli-img.jpg'
 const PedidosUser = (props) => {
 
     useEffect(() => {
 
         traePedidosUsuario();
 
-    },[]);
+    }, []);
 
     const traePedidosUsuario = async () => {
 
         try {
-        
-        // let res = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=51c1099989a6923f3d12154210fc2cf7&language=en-US&page=1");
-    
-        // setPeliculas(res.data.results);
-            
+
+            // let res = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=51c1099989a6923f3d12154210fc2cf7&language=en-US&page=1");
+
+            // setPeliculas(res.data.results);
+
         } catch (error) {
-            
+
         }
-     
-};
+
+    };
 
     const pedidos = [
         {
@@ -48,38 +48,27 @@ const PedidosUser = (props) => {
 
 
     return (
-        <div className="container">
 
-<h3>Mis pedidos</h3>
-            <table className="table-responsive">
-                <thead>
-                    <tr>
-                        <th>Pelicula</th>
-                        <th>Precio</th>
-                        <th>Fecha inicial</th>
-                        <th>Fecha fin</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <>
+        <h3>Película alquilada</h3>
+        <div className="basics_row card-order">
+            
+            <div className="card-data">
 
-                    {pedidos.map(pedido => {
-                        return (
-                            <tr>
-                                <td>{pedido.titulo}</td>
-                                <td>{pedido.precio}</td>
-                                <td>{pedido.date_inicial}</td>
-                                <td>{pedido.date_fin}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+                <p><b>Nombre:  </b>Origen</p>
+                <p><b>Precio:  </b>23</p>
+                <p><b>Fecha inicio:  </b>12/04/2021</p>
+                <p><b>Fecha fin:  </b>20/04/2021</p>
+            </div>
+            <div className="card-img">
+            <img src={foto}/>
+            </div>
         </div>
-    );
+       </> 
+            );
 
 }
 
-export default connect((state)=>({
-    credentials: state.credentials
+export default connect((state) => ({
+                peli: state.peli
 }))(PedidosUser);
- 

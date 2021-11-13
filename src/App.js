@@ -9,6 +9,7 @@ import Register from './Containers/Register/Register';
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Containers/Home/Home';
 import Pelis from './Containers/Pelis/Pelis'
+import Admin from './Containers/Admin/Admin';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/pelis" element={<Pelis/>}/>
+          <Route path="/admin" element={<Admin/>}/>
         </Routes>
       
       </BrowserRouter>

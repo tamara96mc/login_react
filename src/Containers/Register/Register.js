@@ -14,19 +14,19 @@ const Register = () => {
 
     const submit = async () => {
 
-        try {
-            let res = await axios.post("https://api-tmc-pelis.herokuapp.com/api/signup", values);
-            console.log("res", res);
-            localStorage.setItem("datosLogin", JSON.stringify(res.data.user));
 
+        try {
+            debugger;
+             let res = await axios.post("https://api-tmc-pelis.herokuapp.com/api/signup", values);
             setmsgError("Usuario registrado con éxito.");
             setTimeout(() => {
-                history("/profile");
-            }, 4000);
-
+                history("/login");    
+            }, 2000);
+            
         } catch (error) {
-            console.log(error)
-            setmsgError("Error al registrar el usuario.");
+            //console.log(res.msg);
+            console.log(error);
+            setmsgError("Usuario no registrado.");
         }
     };
 
@@ -67,6 +67,7 @@ const Register = () => {
                 />
                 {errors.password && <p className="error">{errors.password}</p>}
             </div>
+            <div className="error">{msgError}</div>
             <div className="send-button" onClick={handleSubmit}>Registrar</div>
 
         </div>

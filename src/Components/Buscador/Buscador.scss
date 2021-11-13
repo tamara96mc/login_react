@@ -11,48 +11,46 @@
             color: $colBlanco1;
             margin-right: 2em;
             margin-bottom: 0.25em;
-     
         }
         
         select{
-        margin-bottom: 0.1em;   
         font-size: larger;
-        height: 1.5em;
+        height: 2.2em;
         width:6em;
         transition: 0.4s;
-        background-color: $colNegro3;
+        background-color: $colNegro1;
         color: $colBlanco1;
-        border: 0.1em solid $colBlanco1;
+        border: 0.05em solid $colBlanco1;
         }
     
         option{
          
         font-size: larger;
-        height: 1.5em;
+        height: 1.3em;
         width:6em;
         transition: 0.4s;
-        background-color: $colNegro3;
+        background-color: $colNegro1;
         color: $colBlanco1;
         }
         input{
         font-size: larger;
-        height: 1.2em;
+        height: 2em;
         width:12em;
         transition: 0.4s;
-        background-color: $colNegro3;
+        background-color: $colNegro1;
         color: $colBlanco1;
-        border: 0.1em solid $colBlanco1;
+        border: 0.05em solid $colBlanco1;
     
         }
         button{
         font-size: larger;
-        height: 1.5em;
+        height: 2.25em;
         width:5em;
         transition: 0.4s;
-        background-color: $colNegro3;
+        background-color: $colNegro1;
         color: $colBlanco1;
         cursor: pointer;
-        border: 0.1em solid $colBlanco1;
+        border: 0.05em solid $colBlanco1;
         }
 
         button:hover{

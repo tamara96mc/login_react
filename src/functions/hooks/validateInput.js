@@ -16,7 +16,6 @@ export function validateLogin(values) {
 
   export function validateSignUp(values) {
     let errors = {};
-    debugger
     if (!values.name) {
       errors.name = "Complete este campo";
     }

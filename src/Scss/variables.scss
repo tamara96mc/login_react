@@ -1,24 +1,8 @@
 
-/*Paletas de colores*/
-
-//Paleta 1
-
-$paleta1_1 : #878787;
-$paleta1_2 : #A08794;
-$paleta1_3 : #BB7E8C;
-$paleta1_4 : #C9B6BE;
-$paleta1_5 : #D1BECF;
-
-
 //Colores básicos
 
 $colRoj1 : rgb(187, 0, 14);
 $colRoj2 : rgb(227, 28, 37);
-
-$colVerd1 : rgb(25, 110, 14);
-$colVerd2 : rgb(47, 209, 26);
-$colVerd3 : rgb(48, 212, 26);
-$colVerd4 : rgb(51, 233, 27);
 
 $colNegro1 : rgb(23, 24, 23);
 $colNegro3 : rgb(32, 32, 32);
@@ -29,12 +13,7 @@ $colBlanco1 : rgb(241, 224, 223);
 
 //Clases
 
-.claseCard {
-    height: 10em;
-    width: 10em;
-    border-radius: 0.5em;
-    background-color: $paleta1_4;
-}
+
 
 .basics_column {
     display: flex;
@@ -150,4 +129,23 @@ h3{
     transition: 0.4s;
     background-color: $colRoj2;
     cursor: pointer;
+}
+
+.table-responsive {
+    
+    background-color:$colBlanco1;
+    margin-bottom: 5em;
+
+    thead{
+
+        background-color: $colNegro1;
+        color: $colBlanco1;
+        padding: 2em;
+    }
+    tbody{
+
+        background-color: $colNegro4;
+        color: $colBlanco1;
+        padding: 2em;
+    }
 }

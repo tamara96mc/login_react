@@ -1,10 +1,13 @@
    
 
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import load from '../../img/load.gif';
-const Home = () => {
+import clienteAxios from '../../config/axios';
+import { connect } from 'react-redux';
+import { SELECT_PELI } from '../../redux/types';
+
+const Home = (props) => {
 
     let navigate = useNavigate();
 
@@ -12,32 +15,34 @@ const Home = () => {
 
 
     useEffect(()=>{
-     
             traePeliculas();
-
     },[]);
 
-    useEffect(()=>{
-        
-    });
 
     const traePeliculas = async () => {
 
             try {
+             
+                let token = props.credentials.token;
+                console.log('props' , props);
+                //CREAMOS LA CONFIGURACIÓN DEL HEADER QUE SE VA A MANDAR
+                let config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                };    
             
-            let res = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=51c1099989a6923f3d12154210fc2cf7&language=en-US&page=1");
-        
-            setPeliculas(res.data.results);
+            let res = await clienteAxios.get("/pelicula", config);
+                
+            setPeliculas(res.data);
                 
             } catch (error) {
-                
+                console.log(error);
             }
          
     };
 
     const escogePelicula = (peliculaEscogida) => {
-        localStorage.setItem("choosenFilm", JSON.stringify(peliculaEscogida));
-
+        
+        props.dispatch({type:SELECT_PELI, payload:peliculaEscogida});
         //redirigire a el perfil de la película....
         navigate("/pelis");
     }
@@ -51,7 +56,7 @@ const Home = () => {
                         return (
                             <div className="peli" key={peli.id} onClick={()=>escogePelicula(peli)}>
                                 <img alt={peli.id} className="cartel" src={`https://image.tmdb.org/t/p/original/${peli.poster_path}`}/>
-                                <p>{peli.original_title}</p>
+                                <p>{peli.title}</p>
                             </div>
                         )
                     })
@@ -72,4 +77,6 @@ const Home = () => {
     
 }
 
-export default Home;
+export default connect((state)=>({
+    credentials: state.credentials
+}))(Home);
