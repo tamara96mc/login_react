@@ -1,4 +1,4 @@
-import {SELECT_PELI, ORDER_PELI} from '../types';
+import {SELECT_PELI, ORDER_PELI,REMOVE_ORDER} from '../types';
 
 const initialState = {
     select_peli : '',
@@ -18,7 +18,9 @@ const peliReducer = (state = initialState, action) => {
                 return {
                 ...state,
                 pedido:action.payload
-                };    
+                };
+        case REMOVE_ORDER :
+                return initialState;
 
         default :
             return state

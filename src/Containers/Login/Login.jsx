@@ -18,8 +18,10 @@ const Login = (props) => {
         try {
             let res = await clienteAxios.post("/api/signin", values);
             setmsgError(`Usuario correcto`);
-            props.dispatch({type:LOGIN, payload:res.data});
-            history("/");
+            setTimeout(() => {
+                props.dispatch({type:LOGIN, payload:res.data});
+                history("/home");   
+            }, 2000);
      
         } catch (error) {
             console.log(error);

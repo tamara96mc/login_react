@@ -1,20 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import {NEW_SEARCH } from '../../redux/types';
 
-const Buscador = () => {
+const Buscador = (props) => {
+
+
+    const [buscador, setBuscador] = useState();
+
+
+    const handleChangeSelect = (e) => {
+        //Función encargada de bindear el hook con los inputs.
+        setBuscador({ ...buscador,[e.target.name]: e.target.value });
+        console.log(buscador)
+    }
+
+    const handleChange = (e) => {
+        //Función encargada de bindear el hook con los inputs.
+        setBuscador({ ...buscador, [e.target.name]: e.target.value });
+        console.log(buscador)
+    }
+
+    
+    const handleSubmit = async () => {
+
+        try {
+            props.dispatch({type: NEW_SEARCH, payload:buscador});
+
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
     return (
         <div className="form-buscador">
-         <label for="cars">Buscar por </label>
+         <label>Buscar por </label>
          <div className="campos">
-            <select name="cars">
-                <option value="volvo">Título</option>
-                <option value="saab">Actor</option>
-                <option value="opel">Género</option>
+            <select name="tipo" onChange={e => handleChangeSelect(e)}>
+                <option value="titulo" name="tipo" >Título</option>
+                <option value="actor"name="tipo"  >Actor</option>
+                <option value="genero" name="tipo">Género</option>
             </select>
-            <input type="text"/>
-                <button>Buscar</button>
+            <input type="text" name="valor"  onChange={e =>handleChange(e)}/>
+                <button onClick={handleSubmit}>Buscar</button>
         </div>
         </div>
     )
 };
-export default Buscador;
+export default connect((state) => ({
+    peli: state.peli
+}))(Buscador);

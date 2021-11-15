@@ -3,6 +3,7 @@
 
 $colRoj1 : rgb(187, 0, 14);
 $colRoj2 : rgb(227, 28, 37);
+$colRoj3 : rgb(240, 49, 59);
 
 $colNegro1 : rgb(23, 24, 23);
 $colNegro3 : rgb(32, 32, 32);
@@ -96,9 +97,10 @@ h3{
     cursor: pointer;
     font-size: large;
     background-color: $colNegro1;
-    color: $colRoj1;
+    color: $colRoj2;
+    font-weight: bold;
     font-size:large;
-    border: 0.20em solid $colRoj1;
+    border: 0.20em solid $colRoj2;
 }
 .send-button:hover {
     transition: 0.4s;
@@ -118,16 +120,17 @@ h3{
     align-items: center;
     cursor: pointer;
     font-size: large;
-    background-color: $colRoj1;
+    background-color: $colRoj2;
     color: $colNegro1;
+    font-weight: bold;
     font-size:large;
-    border: 0.20em solid $colRoj1;
+    border: 0.20em solid $colRoj2;
 }
 
 
 .out-button:hover {
     transition: 0.4s;
-    background-color: $colRoj2;
+    background-color: $colRoj3;
     cursor: pointer;
 }
 

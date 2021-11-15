@@ -1,70 +1,53 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import tokenAuth from '../../config/token';
-import foto from '../../img/peli-img.jpg'
+import { REMOVE_ORDER } from '../../redux/types';
+
+
 const PedidosUser = (props) => {
+
+    const [orderData, setOrderData] = useState();
 
     useEffect(() => {
 
-        traePedidosUsuario();
+        setOrderData(props.peli);
 
-    }, []);
+    }, [props.peli.pedido]);
 
-    const traePedidosUsuario = async () => {
+    const handleSubmit = () => {
+    
+        props.dispatch({ type: REMOVE_ORDER, payload: {
+            select_peli : '',
+            pedido: ''
+        }});
 
-        try {
-
-            // let res = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=51c1099989a6923f3d12154210fc2cf7&language=en-US&page=1");
-
-            // setPeliculas(res.data.results);
-
-        } catch (error) {
-
-        }
-
-    };
-
-    const pedidos = [
-        {
-            date_inicial: "2019/12/01",
-            date_fin: "2019/12/01",
-            precio: 1,
-            titulo: 'sfsdf'
-        },
-        {
-            date_inicial: "2019/12/01",
-            date_fin: "2019/12/01",
-            precio: 1,
-            titulo: 'sfsdf'
-        },
-        {
-            date_inicial: "2019/12/01",
-            date_fin: "2019/12/01",
-            precio: 1,
-            titulo: 'sfsdf'
-        }
-    ];
+        setOrderData(null);
+    }
 
 
     return (
-
         <>
+        {orderData?.pedido &&
+            <>
         <h3>Película alquilada</h3>
         <div className="basics_row card-order">
             
             <div className="card-data">
 
-                <p><b>Nombre:  </b>Origen</p>
-                <p><b>Precio:  </b>23</p>
-                <p><b>Fecha inicio:  </b>12/04/2021</p>
-                <p><b>Fecha fin:  </b>20/04/2021</p>
+                <p><b>Nombre:  </b>{orderData.select_peli.title}</p>
+                <p><b>Precio:  </b>{orderData.pedido.precio}</p>
+                <p><b>Fecha inicio:  </b>{orderData.pedido.fechaAlquiler}</p>
+                <p><b>Fecha fin:  </b>{orderData.pedido.fechaDevolucion}</p>
             </div>
             <div className="card-img">
-            <img src={foto}/>
+            <img src={`https://image.tmdb.org/t/p/original/${orderData.select_peli.poster_path}`}/>
             </div>
         </div>
+        <div className="send-button" onClick={handleSubmit}>Finalizar reserva</div>
        </> 
+        }
+  </>
+        
             );
 
 }

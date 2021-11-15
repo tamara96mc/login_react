@@ -2,20 +2,25 @@ import React, { useState, useEffect } from 'react';
 import clienteAxios from '../../config/axios';
 import { connect } from 'react-redux';
 import { ORDER_PELI } from '../../redux/types';
+import { useNavigate } from 'react-router-dom';
 
 const Pelis = (props) => {
 
     const [peli, setPeli] = useState();
+    const [pedido, setPedido] = useState();
     const [fechas, setFechas] = useState();
     const [cambiarForm, setCambiarForm] = useState(false);
 
-
-    const TODAY = new Date(Date.now());
-    const FECHA_INICIAL = TODAY.toLocaleDateString();
+    let navigate = useNavigate();
 
     useEffect(() => {
         setPeli(props.peli.select_peli);
+        console.log('props' , props)
     }, []);
+
+    useEffect(() => {
+        setPedido(props.peli.pedido.precio);
+    }, [props.peli.pedido.precio]);
 
     const order = async () => {
 
@@ -35,14 +40,13 @@ const Pelis = (props) => {
             fechaAlquiler: fechas.fecha_inicio,
             fechaDevolucion: fechas.fecha_fin,
             peliculaId: props.peli._id,
-            precio: 23,
+            precio: Math.floor(Math.random() * (40 - 20)) + 20,
             clienteId: props.credentials.user._id
         };
 
         try {
 
             let token = props.credentials.token;
-            console.log('props en pelis', token);
             //CREAMOS LA CONFIGURACIÓN DEL HEADER QUE SE VA A MANDAR
             let config = {
                 headers: { Authorization: `Bearer ${token}` }
@@ -50,6 +54,7 @@ const Pelis = (props) => {
             let res = await clienteAxios.post("/pedido", pedido, config);
             //console.log('datos', res.data);
             props.dispatch({ type: ORDER_PELI, payload: pedido });
+            navigate("/profile");
         } catch (error) {
             console.log(error);
         }
@@ -67,8 +72,6 @@ const Pelis = (props) => {
                         <input
                             name="fecha_inicio"
                             type="date"
-                            placeholder="Fecha inicio"
-                            value={FECHA_INICIAL}
                             onChange={handleChange}
                         />
                     </div>
@@ -76,7 +79,6 @@ const Pelis = (props) => {
                         <input
                             name="fecha_fin"
                             type="date"
-                            placeholder="correo"
                             onChange={handleChange}
                         />
                     </div>
@@ -102,8 +104,9 @@ const Pelis = (props) => {
                             </small>
                         </div>
                     </div>
-                    <button className="out-button" onClick={() => order()}>Alquilar</button>
-
+                    {!props.peli.pedido && <button className="out-button" onClick={() => order()}>Alquilar</button>}
+                    
+                    
                 </div>}
 
 
