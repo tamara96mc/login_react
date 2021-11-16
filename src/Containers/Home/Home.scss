@@ -25,8 +25,10 @@
 }
 
 .img-load{
-    width: 100vw;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .peli:hover{
@@ -34,5 +36,12 @@
     background-color: $colNegro5;
     cursor: pointer;
     color: $colBlanco1;
+}
+
+.espacio{
+    height: 2.3em;
+    display: flex;
+    width: 10em;
+    margin: 1em;
 }
 

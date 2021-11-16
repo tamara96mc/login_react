@@ -20,7 +20,7 @@ const peliReducer = (state = initialState, action) => {
                 pedido:action.payload
                 };
         case REMOVE_ORDER :
-                return initialState;
+                return action.payload;
 
         default :
             return state

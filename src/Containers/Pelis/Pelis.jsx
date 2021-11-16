@@ -39,7 +39,7 @@ const Pelis = (props) => {
         const pedido = {
             fechaAlquiler: fechas.fecha_inicio,
             fechaDevolucion: fechas.fecha_fin,
-            peliculaId: props.peli._id,
+            peliculaId: props.peli.select_peli._id,
             precio: Math.floor(Math.random() * (40 - 20)) + 20,
             clienteId: props.credentials.user._id
         };
@@ -52,8 +52,7 @@ const Pelis = (props) => {
                 headers: { Authorization: `Bearer ${token}` }
             };
             let res = await clienteAxios.post("/pedido", pedido, config);
-            //console.log('datos', res.data);
-            props.dispatch({ type: ORDER_PELI, payload: pedido });
+            props.dispatch({ type: ORDER_PELI, payload: res.data });
             navigate("/profile");
         } catch (error) {
             console.log(error);

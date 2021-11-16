@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { REMOVE_ORDER } from '../../redux/types';
 
 
@@ -14,14 +15,36 @@ const PedidosUser = (props) => {
 
     }, [props.peli.pedido]);
 
-    const handleSubmit = () => {
-    
-        props.dispatch({ type: REMOVE_ORDER, payload: {
-            select_peli : '',
-            pedido: ''
-        }});
+    const handleSubmit = async () => {
 
-        setOrderData(null);
+        const pedido = {
+            fechaAlquiler: orderData.pedido.fechaAlquiler,
+            fechaDevolucion: orderData.pedido.fechaDevolucion,
+            peliculaId: orderData.pedido.peliculaId,
+            precio:  orderData.pedido.precio,
+            clienteId: orderData.pedido.clienteId,
+            activo: false
+        }
+
+        try {
+            let token = props.credentials.token;
+            let config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+
+            console.log('id' + orderData.select_peli._id + ' pedid ' , pedido);
+
+            let res = await axios.put(`https://api-tmc-pelis.herokuapp.com/pedido/${orderData.pedido._id}`, pedido, config);
+            props.dispatch({ type: REMOVE_ORDER, payload: {
+                select_peli : '',
+                pedido: ''
+            }});
+            setOrderData(null);
+
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 
 
@@ -48,10 +71,11 @@ const PedidosUser = (props) => {
         }
   </>
         
-            );
+);
 
 }
 
 export default connect((state) => ({
+            credentials: state.credentials,
                 peli: state.peli
 }))(PedidosUser);
