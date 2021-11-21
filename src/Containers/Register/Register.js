@@ -67,7 +67,7 @@ const Register = () => {
                 />
                 {errors.password && <p className="error">{errors.password}</p>}
             </div>
-            <div className="error">{msgError}</div>
+            <div className="info">{msgError}</div>
             <div className="send-button" onClick={handleSubmit}>Registrar</div>
 
         </div>

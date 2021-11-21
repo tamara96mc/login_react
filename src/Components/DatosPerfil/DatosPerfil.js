@@ -34,7 +34,7 @@ const DatosPerfil = (props) => {
     
         props.dispatch({ type: LOGOUT });
         localStorage.clear();
-        navigate("/");
+        navigate("/login");
     }
 
     const handleChange = (e) => {

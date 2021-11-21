@@ -20,7 +20,7 @@ const Login = (props) => {
             setmsgError(`Usuario correcto`);
             setTimeout(() => {
                 props.dispatch({type:LOGIN, payload:res.data});
-                history("/home");   
+                history("/");   
             }, 2000);
      
         } catch (error) {
@@ -62,7 +62,7 @@ const Login = (props) => {
                 />
                 {errors.password && <p className="error">{errors.password}</p>}
             </div>
-            <div className="error">{msgError}</div>
+            <div className="info">{msgError}</div>
             <div className="send-button" onClick={handleSubmit}>Login</div>
 
         </div>

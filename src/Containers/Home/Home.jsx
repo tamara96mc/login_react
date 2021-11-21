@@ -60,7 +60,7 @@ const Home = (props) => {
         <div className="basics_row_space">
         <div className="espacio"></div>
         <h3>Las películas</h3>
-        <button className="out-button" onClick={() => handleSubmit()}>Reset</button>
+        <button className="send-button" onClick={() => handleSubmit()}>Reset</button>
         </div>
             {peliculas[0]?.title 
                 ?

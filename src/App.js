@@ -10,22 +10,23 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './Containers/Home/Home';
 import Pelis from './Containers/Pelis/Pelis'
 import Admin from './Containers/Admin/Admin';
+import PrivateRoute from './Components/PrivateRoute.js';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
 
       <BrowserRouter>
       <Navbar/>
         <Routes>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/" element={<Login/>}/>
+          <Route  path="/" element={<Home/>} />
+          <Route path="/login" element={<Login/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/pelis" element={<Pelis/>}/>
           <Route path="/admin" element={<Admin/>}/>
         </Routes>
-      
+
       </BrowserRouter>
       
     </div>

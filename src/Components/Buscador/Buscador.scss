@@ -59,6 +59,20 @@
             cursor: pointer;
         }
     
+        @media (max-width: 935px) {
+
+            select{
+                width:3em;
+            }
+            input{
+                width: 5em;
+            }
+            button{
+
+                font-size: 1.17em;
+            }
+          }
+        
 
     
 }

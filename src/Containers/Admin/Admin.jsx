@@ -1,69 +1,81 @@
-   
 
-import React, {useState, useEffect} from 'react';
+
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
-import load from '../../img/load.gif'
+import { useNavigate } from 'react-router-dom';
+import load from '../../img/Ellipsis-1.2s-217px.gif';
+import clienteAxios from '../../config/axios';
+import { connect } from 'react-redux';
 
-const Home = () => {
+const Admin = (props) => {
+
+    const [pedidosActivos, setPedidosActivos] = useState([]);
+
+    useEffect(() => {
+        traePeliculas("/pedido");
+    }, []);
+
+    const traePeliculas = async (endPoint) => {
+
+        try {
+            let token = props.credentials.token;
+            //CREAMOS LA CONFIGURACIÓN DEL HEADER QUE SE VA A MANDAR
+            let config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+            let res = await clienteAxios.get(endPoint, config);
+
+            console.log('datos' , res.data);
+            setPedidosActivos(res.data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
 
-    const [pedidos, setPedidos] = useState(
-        [{
-            usuario: 'Sofia',
-            pelicula : 'El rey leon',
-            precio : 23,
-            date_inicial: '12/12/2019',
-            date_fin : '15/12/2019'
-        },
-        {
-            usuario: 'Tomás',
-            pelicula : 'Origen',
-            precio : 54,
-            date_inicial: '06/03/2020',
-            date_fin : '09/03/2020'
-        },
-        {
-            usuario: 'Luis',
-            pelicula : 'In the time',
-            precio : 43,
-            date_inicial: '14/05/2021',
-            date_fin : '17/06/2021'
-        }]
-    );
+    return (
+        <>
+        <h3>Administación de pedidos</h3>
+            {pedidosActivos ?
 
-
-        return (
-            <div className="container">
-                <h3>Administación de pedidos</h3>
-            <table className="table-responsive">
-                <thead>
-                    <tr>
-                        <th>Usuario</th>
-                        <th>Pelicula</th>
-                        <th>Precio</th>
-                        <th>Fecha inicial</th>
-                        <th>Fecha fin</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {pedidos.map(pedido => {
-                        return (
+                <div className="container">
+                    <table className="table-responsive">
+                        <thead>
                             <tr>
-                                <td>{pedido.usuario}</td>
-                                <td>{pedido.pelicula}</td>
-                                <td>{pedido.precio}</td>
-                                <td>{pedido.date_inicial}</td>
-                                <td>{pedido.date_fin}</td>
+                                <th>Usuario</th>
+                                <th>Pelicula</th>
+                                <th>Precio</th>
+                                <th>Fecha inicial</th>
+                                <th>Fecha fin</th>
                             </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
-        )
+                        </thead>
+                        <tbody>
+
+                            {pedidosActivos.map(pedido => {
+                                return (
+                                    <tr>
+                                        <td>{pedido.cliente.name}</td>
+                                        <td>{pedido.pelicula.title}</td>
+                                        <td>{pedido.precio}</td>
+                                        <td>{pedido.fechaAlquiler}</td>
+                                        <td>{pedido.fechaDevolucion}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+                :
+                <div className="img-load">
+                    <img src={load} alt="" />
+                </div>
+            }
+        </>
+    )
 
 };
 
-export default Home;
+export default connect((state) => ({
+    credentials: state.credentials
+}))(Admin);

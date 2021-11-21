@@ -20,9 +20,9 @@ const PedidosUser = (props) => {
         const pedido = {
             fechaAlquiler: orderData.pedido.fechaAlquiler,
             fechaDevolucion: orderData.pedido.fechaDevolucion,
-            peliculaId: orderData.pedido.peliculaId,
+            pelicula: orderData.pedido.pelicula,
             precio:  orderData.pedido.precio,
-            clienteId: orderData.pedido.clienteId,
+            cliente: orderData.pedido.cliente,
             activo: false
         }
 

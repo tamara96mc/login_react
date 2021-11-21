@@ -15,7 +15,7 @@ const Pelis = (props) => {
 
     useEffect(() => {
         setPeli(props.peli.select_peli);
-        console.log('props' , props)
+
     }, []);
 
     useEffect(() => {
@@ -39,9 +39,10 @@ const Pelis = (props) => {
         const pedido = {
             fechaAlquiler: fechas.fecha_inicio,
             fechaDevolucion: fechas.fecha_fin,
-            peliculaId: props.peli.select_peli._id,
+            pelicula: props.peli.select_peli,
             precio: Math.floor(Math.random() * (40 - 20)) + 20,
-            clienteId: props.credentials.user._id
+            cliente: props.credentials.user,
+            activo: true
         };
 
         try {
@@ -103,9 +104,7 @@ const Pelis = (props) => {
                             </small>
                         </div>
                     </div>
-                    {!props.peli.pedido && <button className="out-button" onClick={() => order()}>Alquilar</button>}
-                    
-                    
+                    {!props.peli.pedido && <button className="blank-button" onClick={() => order()}>Alquilar</button>} 
                 </div>}
 
 
