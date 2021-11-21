@@ -39,4 +39,4 @@ Usando las siguientes tecnologías:
 *Solo accesible para el usuario con rol admin
 
 
-la demo disponible en
+la demo disponible en https://dev3368.d1sdyrig26ol4i.amplifyapp.com/
