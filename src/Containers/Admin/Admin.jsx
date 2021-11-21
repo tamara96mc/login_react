@@ -25,7 +25,6 @@ const Admin = (props) => {
             };
             let res = await clienteAxios.get(endPoint, config);
 
-            console.log('datos' , res.data);
             setPedidosActivos(res.data);
 
         } catch (error) {
@@ -54,7 +53,7 @@ const Admin = (props) => {
 
                             {pedidosActivos.map(pedido => {
                                 return (
-                                    <tr>
+                                    <tr key={pedido._id}>
                                         <td>{pedido.cliente.name}</td>
                                         <td>{pedido.pelicula.title}</td>
                                         <td>{pedido.precio}</td>
