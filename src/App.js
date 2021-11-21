@@ -10,7 +10,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './Containers/Home/Home';
 import Pelis from './Containers/Pelis/Pelis'
 import Admin from './Containers/Admin/Admin';
-import PrivateRoute from './Components/PrivateRoute.js';
+import PrivateRoute from './Components/PrivateRoute.jsx';
 
 function App(props) {
   return (
