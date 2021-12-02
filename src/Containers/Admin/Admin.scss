@@ -6,23 +6,3 @@
     align-items: center;
 
 }
-
-.table-responsive {
-
-    background-color:$colBlanco1;
-    margin: 3em;
-    width: 80vw;
-
-    thead{
-
-        background-color: $colNegro1;
-        color: $colBlanco1;
-        padding: 2em;
-    }
-    tbody{
-
-        background-color: $colNegro4;
-        color: $colBlanco1;
-        padding: 2em;
-    }
-}

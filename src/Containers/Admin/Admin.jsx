@@ -1,80 +1,52 @@
 
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import load from '../../img/Ellipsis-1.2s-217px.gif';
-import clienteAxios from '../../config/axios';
 import { connect } from 'react-redux';
+import SubBoton from '../../Components/SubBoton/SubBoton';
+import VerPedidos from '../../Components/VerPedidos/VerPedidos';
+import VerUsuarios from '../../Components/VerUsuarios/VerUsuarios';
 
 const Admin = (props) => {
 
-    const [pedidosActivos, setPedidosActivos] = useState([]);
+    const [bloque, setBloque] = useState();
 
     useEffect(() => {
-        traePeliculas("/pedido");
-    }, []);
-
-    const traePeliculas = async (endPoint) => {
-
-        try {
-            let token = props.credentials.token;
-            //CREAMOS LA CONFIGURACIÓN DEL HEADER QUE SE VA A MANDAR
-            let config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
-            let res = await clienteAxios.get(endPoint, config);
-
-            setPedidosActivos(res.data);
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
+      
+        setBloque(props.submenu);
+        
+    }, [props.submenu]);
 
     return (
-        <>
-        <h3>Administación de pedidos</h3>
-            {pedidosActivos ?
+        <div className="basics_row">
 
-                <div className="container">
-                    <table className="table-responsive">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Pelicula</th>
-                                <th>Precio</th>
-                                <th>Fecha inicial</th>
-                                <th>Fecha fin</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <div className="basics_column">
+                <SubBoton bloque="Pedidos" />
+                <SubBoton bloque="Usuarios" />
+            </div>
 
-                            {pedidosActivos.map(pedido => {
-                                return (
-                                    <tr key={pedido._id}>
-                                        <td>{pedido.cliente.name}</td>
-                                        <td>{pedido.pelicula.title}</td>
-                                        <td>{pedido.precio}</td>
-                                        <td>{pedido.fechaAlquiler}</td>
-                                        <td>{pedido.fechaDevolucion}</td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-                :
-                <div className="img-load">
-                    <img src={load} alt="" />
-                </div>
-            }
-        </>
+            <div lassName="basics_row">
+                {(() => {
+                    switch (bloque) {
+                        case 'Pedidos':
+                            return (
+                                <VerPedidos/>
+                            )
+                        case 'Usuarios':
+                            return (
+                                <VerUsuarios/>
+                            )
+                        default:
+                            return (
+                                <VerPedidos/>
+                            )
+                    }
+                })()}
+            </div>
+        </div>
     )
 
 };
 
 export default connect((state) => ({
-    credentials: state.credentials
+    submenu: state.submenu
 }))(Admin);

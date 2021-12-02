@@ -6,3 +6,4 @@ export const ORDER_PELI = 'order_peli';
 export const NEW_SEARCH = 'new_search';
 export const RESET_SEARCH = 'reset_search';
 export const REMOVE_ORDER = 'remove_order';
+export const CHANGE_SUBMENU = 'change_submenu';

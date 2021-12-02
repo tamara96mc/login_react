@@ -10,14 +10,13 @@ const Buscador = (props) => {
 
     const handleChangeSelect = (e) => {
         //Función encargada de bindear el hook con los inputs.
-        setBuscador({ 'tipo': e.target.value });
-        console.log(buscador)
+        setBuscador( { 'tipo': e.target.value });
+
     }
 
     const handleChange = (e) => {
         //Función encargada de bindear el hook con los inputs.
         setBuscador({ ...buscador, [e.target.name]: e.target.value });
-        console.log(buscador)
     }
 
     
